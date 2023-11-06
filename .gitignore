@@ -1,3 +1,4 @@
 composer.phar
+.env.php
 /vendor/
 .idea/*
