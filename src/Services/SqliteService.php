@@ -19,7 +19,7 @@ class SqliteService
     const TABLE_NAME = 'tokens';
 
     /**
-     * @var \SQLite3
+     * @var SQLite3
      */
     private SQLite3 $db;
 
@@ -83,7 +83,11 @@ class SqliteService
         return $resultArray;
     }
 
-    public function createTokenTable()
+    /**
+     * Создает таблицу tokens
+     * @return void
+     */
+    public function createTokenTable(): void
     {
         $this->db->exec("CREATE TABLE tokens (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

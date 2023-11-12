@@ -33,7 +33,7 @@ try {
         $accessToken = $tokenService->getToken();
     } else {
         //TODO: Придумать, как передать codeAccess
-        $codeAccess = 'def5020010afcdf95f8fbe5ec2baffa4a0a0e4a9d73a35a7e94e73af37273293186074221dee947633f412788ba3613ea28d4e9a9cd2e5d49a271b9b7a12e9d673ef5427ce46a7666f0318c06ac893ebe97323609bbc954540949d357e77b4e154e032e8f1342655fb5d0a51c062cd3e24c8807321028de710a57c76d31a1ab223129279c35e25a8c6574b0b6e3235ae056430110e659ee040962a99d48a27fae56e486daa02475ac91748431686bdc7dc8a917c70785cdd5acd766ca118a8f8b7baae998252ddff782a803a3049b04b6921638e2d9e1fcd39e47a938f416a6118c6ca15c3934cbde80da272fe76b79b295c451063d195f84aa5206e84cfffba3b356d7a0b44af8e4100723d3d773efc0a951d4fe432c2742e5fd570c47df5623ad09cc2be5372366351bb1d8fe2cad4ebfb7c0cdabe0d529aec62b04af12e45b0f6fb01913f8ee8672626944903013e8390c3229c3f61fe9ce86c66f1a06ea892fed7c65075bb2aac7a3804f92a2e7effea629339bd6a186bcf6a8b1a84afcfcebcc1215cefe7c810e9d1070e9e20ef67a32f33ad0fa258a1f4188e465c19f99b69a5ed6e83789091615e4d727e347cf4cfcdaa4e2ef18c46e61e18aaa916d3bb9e38a2b90632775da611302400615ecdb647fa3d0d2f10f224a346f19d3cc7c234bbf9912bdcc18a';
+        $codeAccess = 'def5020037def02363362a4205a70bc82ff7f5d0542d757eefe5408f455f6c37260b93a5dfb73abcc7778668fd007a064192b30c3c719095a8ef587d57598f6b6005fe2809d25f81274def8d0cbfceac778bc2248da73eddb314cc1543f8cc40cf67cb5280057b9681b83a0bf8bc6a1850389d0dcdde8cbb2c81705121e731d97312bb82e5b77a5ba037e2c8a9db9c8f384614181aead2b256b7c858f0de2d976bfe622089d068970f014ee5281af6a02279d7048094210a0522d76084a406fc458f11b194a0044b6522e07084e7d833b3ce9d985e330cde28b466e6438d1a1e4fb55cc0619907d4d0481f59d8ebb43849a1ef1e23f7a678a667d25bcbbcef7b29b5c0908f1fda08b04db783cc5dbc54ae24f675ac5f92c5288bc5aecc68803ef8494de96fccee6c2803f8baeab4ef1f123a4dc8759c16f7c15eddb0c0d7b11343aeb89da0445bd9ce5dc9a902531702de3f03addbe39e2d52d739e8745d0c3304dc07da6e591dac102815739025c71ca04edb95c3750ae2d6e59b1e12cf0ad2a8009f2aa843b095cbf172a688ac58a1ac7167d4830c3350145d0c0c4f1e6a9e3eb01e5f0e4d0cfa92c1a79a94be8013e8a1bd30de846f7c8d4aa966d9b186cbcef3ec9f1526e6e757a71667ddbc452725bccf1a2aa1b0f0c3289a2519a343f996798c6e152359b4c3';
         if (!$codeAccess) {
             throw new Exception('Отсутствует секретный код авторизации');
         }
@@ -49,8 +49,11 @@ try {
 
     // Получение сервиса по сделкам с апи клиента
     $leadsService = $apiClient->leads();
+
     //Отправить сделку
-    $res = $leadsService->addOneComplex(LeadModelService::getLeadModel($_POST));
+    $leadModelService = new LeadModelService();
+    $res = $leadsService->addOneComplex($leadModelService->getLeadModel($_POST));
+
     if ($res->getId() > 0) {
         require_once $_SERVER['DOCUMENT_ROOT'] . '/success-page.php';
     } else {

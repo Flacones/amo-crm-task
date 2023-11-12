@@ -13,19 +13,19 @@
     <form action="send-contact.php" method="post" id="contact_form">
         <div class="name">
             <label for="name"></label>
-            <input type="text" placeholder="name" name="name" required>
+            <input type="text" placeholder="name" name="name" required id="name">
         </div>
         <div class="email">
             <label for="email"></label>
-            <input type="email" placeholder="e-mail" name="email" required>
+            <input type="email" placeholder="e-mail" name="email" required id="email">
         </div>
         <div class="telephone">
-            <label for="name"></label>
-            <input type="text" placeholder="phone" name="phone" required>
+            <label for="phone"></label>
+            <input type="text" placeholder="phone" name="phone" required id="phone">
         </div>
         <div class="price">
-            <label for="name"></label>
-            <input type="text" placeholder="price" name="price" required>
+            <label for="price"></label>
+            <input type="text" placeholder="price" name="price" required id="price">
         </div>
         <div class="submit">
             <input type="submit" value="Send Message" id="form_button"/>

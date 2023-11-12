@@ -15,7 +15,7 @@ class TokenService
 {
 
     /**
-     * @var \App\Services\SqliteService
+     * @var SqliteService
      */
     private SqliteService $dbService;
 
@@ -28,7 +28,7 @@ class TokenService
     }
 
     /**
-     * @return \League\OAuth2\Client\Token\AccessToken
+     * @return AccessToken
      */
     public function getToken(): AccessToken
     {

@@ -19,26 +19,21 @@ use Exception;
 class LeadModelService
 {
     /**
-     * Формирует полученные данные в методы для заполнение в сделку
+     * Формирует полученные данные в методы для заполнения в сделку
      * @param array $request
-     * @return \AmoCRM\Models\LeadModel
-     * @throws \Exception
+     * @return LeadModel
+     * @throws Exception
      */
-    public static function getLeadModel(array $request): LeadModel
+    public function getLeadModel(array $request): LeadModel
     {
-        $requiredParams = ['name', 'email', 'phone', 'price'];
-        foreach ($requiredParams as $requiredParam) {
-            if (!$request[$requiredParam]) {
-                throw new Exception('Поле ' . $requiredParam . ' не заполнено');
-            }
-        }
+        $validatedParams = $this->validateLeadModelFields($request);
         $customPhoneField = (new MultitextCustomFieldValuesModel())
             ->setFieldCode('PHONE')
             ->setValues(
                 (new MultitextCustomFieldValueCollection())
                     ->add(
                         (new MultitextCustomFieldValueModel())
-                            ->setValue($request['phone'])
+                            ->setValue($validatedParams['phone'])
                     )
             );
         $customEmailField = (new MultitextCustomFieldValuesModel())
@@ -47,13 +42,13 @@ class LeadModelService
                 (new MultitextCustomFieldValueCollection())
                     ->add(
                         (new MultitextCustomFieldValueModel())
-                            ->setValue($request['email'])
+                            ->setValue($validatedParams['email'])
                     )
             );
         $contractCollection = (new ContactsCollection())
             ->add(
                 (new ContactModel())
-                    ->setFirstName($request['name'])
+                    ->setFirstName($validatedParams['name'])
                     ->setCustomFieldsValues(
                         (new CustomFieldsValuesCollection())
                             ->add($customPhoneField)->add($customEmailField)
@@ -61,7 +56,27 @@ class LeadModelService
             );
         return (new LeadModel())
             ->setName('Тестовая сделка')
-            ->setPrice((int)$request['price'])
+            ->setPrice((int)$validatedParams['price'])
             ->setContacts($contractCollection);
+    }
+
+    /**
+     * Валидация запроса от клиента
+     * @param array $request
+     * @return array
+     * @throws Exception
+     */
+    private function validateLeadModelFields(array $request): array
+    {
+        $validatedParams = [];
+        $requiredParams = ['name', 'email', 'phone', 'price'];
+        foreach ($requiredParams as $requiredParam) {
+            if (!$request[$requiredParam]) {
+                throw new Exception('Поле ' . $requiredParam . ' не заполнено');
+            } else {
+                $validatedParams[$requiredParam] = $request[$requiredParam];
+            }
+        }
+        return $validatedParams;
     }
 }
