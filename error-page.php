@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Ваша заявка успешно отправлена</title>
+<title>Не удалось создать сделку</title>
 <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet" type="text/css">
 <style>
     html, body {
@@ -47,10 +47,14 @@
 <div class="flex-center position-ref full-height">
     <div class="content">
         <div class="title">
-            <br><span style="font-size:33px;font-weight:500;">Спасибо!</span><br><br>
-            Ваша сделка успешно отправлена.<br>
-            <br><br><a href="index.php" style="text-decoration: none; border-bottom: 1px dotted">Вернуться на форму</a>
+            <br><span style="font-size:33px;font-weight:500;">Не удалось создать сделку<br>
+                   <a href="index.php" style="text-decoration: none; border-bottom: 1px dotted">Вернуться на форму</a>
         </div>
+        <pre>
+                <?php
+                echo $errorMessage;
+                ?>
+            </pre>
     </div>
 </div>
 </body>

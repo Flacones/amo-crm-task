@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Services;
-
 
 use AmoCRM\Collections\ContactsCollection;
 use AmoCRM\Collections\CustomFieldsValuesCollection;
@@ -11,6 +9,7 @@ use AmoCRM\Models\CustomFieldsValues\MultitextCustomFieldValuesModel;
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\MultitextCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\MultitextCustomFieldValueModel;
 use AmoCRM\Models\LeadModel;
+use Exception;
 
 /**
  * Вспомогательный класс для создания сделок с api AmoCRM
@@ -27,11 +26,10 @@ class LeadModelService
      */
     public static function getLeadModel(array $request): LeadModel
     {
-
         $requiredParams = ['name', 'email', 'phone', 'price'];
         foreach ($requiredParams as $requiredParam) {
             if (!$request[$requiredParam]) {
-                throw new \Exception('Поле ' . $requiredParam . ' не заполнено');
+                throw new Exception('Поле ' . $requiredParam . ' не заполнено');
             }
         }
         $customPhoneField = (new MultitextCustomFieldValuesModel())
