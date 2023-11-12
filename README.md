@@ -29,15 +29,22 @@ composer require amocrm/amocrm-api-library
 ## .env.php
 Для использования AmoCRMApiClient понадобятся параметры, которые нужно указать в файле .env.php. (Пример в файле .env.example.php)
 ```php
-return [
+$params = [
     // Идентификатор интеграции в amoCRM
     'CLIENT_ID' => 'xxxxx-xxxxx-xxxxx-xxxxx-xxxxx',
     // Секретный ключ интеграции
     'CLIENT_SECRET' => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-    // Адрес страницы, на которую будет перенаправлен пользователь после авторизации в amoCRM (должен совпадать с адресом, котороый указывали в интеграции)
+    // Адрес страницы, на которую будет перенаправлен пользователь после авторизации в amoCRM (должен совпадать с адресом, который указывали в интеграции)
     'REDIRECT_URI' => 'http://test.com/',
     // Поддомен нужного аккаунта
     'BASE_DOMAIN' => 'test'
 ];
+foreach ($params as $key => $value) {
+    putenv($key . '=' . $value);
+}
 ```
-
+Доставать данные с .env.php будем с помощью Helper'а EnvHelper.php
+Пример использования
+```php
+ EnvHelper::getEnvValue('CLIENT_ID');
+```

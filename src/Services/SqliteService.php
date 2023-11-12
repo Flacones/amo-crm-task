@@ -32,6 +32,14 @@ class SqliteService
     }
 
     /**
+     * SqliteService destructor.
+     */
+    public function __destruct()
+    {
+        $this->db->close();
+    }
+
+    /**
      * Проверка на наличие токена в бд
      * @return bool
      */
@@ -60,9 +68,7 @@ class SqliteService
         $refresh_token = $token->getRefreshToken();
         $expires_date = $token->getExpires();
         $token_type = $token->getValues()['token_type'];
-        $db = new SQLite3(self::DB_NAME);
-        $db->exec("INSERT INTO tokens (access_token, refresh_token, expiration_date, token_type) VALUES ( '$accessToken','$refresh_token', $expires_date, '$token_type')");
-        $db->close();
+        $this->db->exec("INSERT INTO tokens (access_token, refresh_token, expiration_date, token_type) VALUES ( '$accessToken','$refresh_token', $expires_date, '$token_type')");
     }
 
     /**
@@ -73,14 +79,13 @@ class SqliteService
     {
         $res = $this->db->query('SELECT * FROM tokens LIMIT 1');
         $row = $res->fetchArray();
-        $resultArray = [
+
+        return [
             'access_token' => $row['access_token'],
             'refresh_token' => $row['refresh_token'],
             'expires' => $row['expiration_date'],
             'token_type' => $row['token_type'],
         ];
-        $this->db->close();
-        return $resultArray;
     }
 
     /**
@@ -96,7 +101,6 @@ class SqliteService
         expiration_date INTEGER,
         token_type VARCHAR
          )");
-        $this->db->close();
     }
 
     /**
@@ -111,6 +115,5 @@ class SqliteService
         $token_type = $token->getValues()['token_type'];
         $db = new SQLite3(self::DB_NAME);
         $db->exec("UPDATE tokens SET access_token = '$accessToken', refresh_token = '$refresh_token', expiration_date = $expires_date, token_type = '$token_type' WHERE id = 1");
-        $db->close();
     }
 }
