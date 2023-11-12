@@ -1,5 +1,12 @@
 {
-    "require": {
-        "amocrm/amocrm-api-library": "^0.13.0"
+  "require": {
+    "amocrm/amocrm-api-library": "^0.13.0",
+    "ext-curl": "*",
+    "ext-sqlite3": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
     }
+  }
 }
