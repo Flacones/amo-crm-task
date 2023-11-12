@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 
 <meta charset="UTF-8">
 <meta name="viewport"
@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Не удалось создать сделку</title>
+<title>Сохранение кода авторизации</title>
 <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet" type="text/css">
 <style>
     html, body {
@@ -46,14 +46,8 @@
 <div class="flex-center position-ref full-height">
     <div class="content">
         <div class="title">
-            <br><span style="font-size:33px;font-weight:500;">Не удалось создать сделку<br>
-                   <a href="index.php" style="text-decoration: none; border-bottom: 1px dotted">Вернуться на форму</a>
+            <br><span style="font-size:33px;font-weight:500;">Код авторизации сохранен, закройте это окно<br>
         </div>
-        <pre>
-                <?php
-                echo $errorMessage;
-                ?>
-            </pre>
     </div>
 </div>
 </body>

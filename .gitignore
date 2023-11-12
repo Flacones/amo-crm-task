@@ -4,3 +4,4 @@ composer.phar
 .idea/*
 *.db
 test2.php
+auth_code.txt
