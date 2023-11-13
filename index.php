@@ -75,7 +75,7 @@ if (!$authCodeService->isAuthCodeExists()) {
                 <input type="text" placeholder="price" name="price" required id="price">
             </div>
             <div class="submit">
-                <input type="submit" value="Send Message" id="form_button"/>
+                <input type="submit" value="Send Deal" id="form_button"/>
             </div>
         </form>
         <?php
